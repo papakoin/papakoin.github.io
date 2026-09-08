@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useState, useSyncExternalStore } from "react";
-import { ArrowDownIcon } from "@/components/icons";
-import { KickIcon, TwitchIcon, YouTubeIcon } from "@/components/icons";
+import { ArrowDownIcon, KickIcon, TwitchIcon, YouTubeIcon } from "@/components/icons";
 import { site } from "@/lib/site";
 import {
   fetchStreamStatus,
