@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { ArrowDownIcon } from "@/components/icons";
+import { KickIcon, TwitchIcon, YouTubeIcon } from "@/components/icons";
 import { site } from "@/lib/site";
 import {
   fetchStreamStatus,
@@ -22,6 +23,7 @@ export function LiveHero() {
   );
   const [state, setState] = useState<LiveState>("unknown");
   const [game, setGame] = useState<string | null>(null);
+  const [viewers, setViewers] = useState<number | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -29,6 +31,7 @@ export function LiveHero() {
       if (cancelled) return;
       setState(status.state);
       setGame(status.game);
+      setViewers(status.viewers);
     });
     return () => {
       cancelled = true;
@@ -80,6 +83,11 @@ export function LiveHero() {
                   <span className="size-2 rounded-full bg-live" />
                 </span>
                 Live
+                {viewers != null ? (
+                  <span className="font-medium tracking-normal normal-case text-white/80">
+                    · {viewers.toLocaleString()} watching
+                  </span>
+                ) : null}
               </p>
             ) : offline ? (
               <p
@@ -119,9 +127,38 @@ export function LiveHero() {
                     </span>
                   </p>
                   <p className="mt-1 text-sm text-charcoal/65">
-                    Streaming from {site.region}. One stream, everywhere at
-                    once.
+                    Streaming from {site.region}. One stream on Twitch, Kick,
+                    and YouTube.
                   </p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    <a
+                      href={site.links.twitch}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1.5 rounded-full bg-white/70 px-2.5 py-1 text-[11px] font-semibold text-charcoal no-underline"
+                    >
+                      <TwitchIcon size={12} />
+                      Twitch
+                    </a>
+                    <a
+                      href={site.links.youtube}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1.5 rounded-full bg-white/70 px-2.5 py-1 text-[11px] font-semibold text-charcoal no-underline"
+                    >
+                      <YouTubeIcon size={12} />
+                      YouTube
+                    </a>
+                    <a
+                      href={site.links.kick}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1.5 rounded-full bg-white/70 px-2.5 py-1 text-[11px] font-semibold text-charcoal no-underline"
+                    >
+                      <KickIcon size={12} />
+                      Kick
+                    </a>
+                  </div>
                 </div>
               )}
             </div>

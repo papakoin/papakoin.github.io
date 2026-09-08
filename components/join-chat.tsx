@@ -106,7 +106,7 @@ export function JoinChat() {
             <SectionHeading
               eyebrow="Join the chat"
               title="Sign in to chat."
-              kicker="Be kind. Have fun. Let's build a positive community."
+              kicker="One conversation across Twitch, Kick, and YouTube. Be kind. Have fun. Let's build a positive community."
             />
             <div className="mt-8 flex flex-col gap-3">
               {session ? (
@@ -143,6 +143,14 @@ export function JoinChat() {
                 <DiscordIcon size={18} className="text-[#5865f2]" />
                 Join our Discord
               </a>
+              <a
+                href={site.links.twitch}
+                target="_blank"
+                rel="noreferrer"
+                className="text-center text-sm font-semibold text-charcoal underline decoration-sun decoration-2 underline-offset-4"
+              >
+                Follow on Twitch
+              </a>
             </div>
             {notice ? (
               <p className="mt-5 max-w-sm text-sm leading-relaxed text-charcoal/70">
@@ -160,8 +168,13 @@ export function JoinChat() {
           </div>
 
           <div className="rounded-[28px] bg-white p-5 shadow-[0_20px_50px_rgba(80,50,20,0.08)] sm:p-6">
-            <div className="mb-4 flex items-center justify-between">
-              <p className="text-sm font-semibold text-charcoal">Live chat</p>
+            <div className="mb-4 flex items-center justify-between gap-3">
+              <div>
+                <p className="text-sm font-semibold text-charcoal">Live chat</p>
+                <p className="text-[11px] text-muted">
+                  Twitch · Kick · YouTube
+                </p>
+              </div>
               <span className="rounded-full bg-sun px-2.5 py-1 text-[10px] font-bold tracking-[0.14em] text-charcoal uppercase">
                 Live
               </span>

@@ -6,6 +6,7 @@ export type StreamStatus = {
   state: LiveState;
   game: string | null;
   title: string | null;
+  viewers: number | null;
 };
 
 const CHANNEL =
@@ -37,17 +38,24 @@ export async function fetchStreamStatus(
   const timer = setTimeout(() => controller.abort(), 4000);
 
   try {
-    const [uptimeRes, gameRes] = await Promise.all([
+    const [uptimeRes, gameRes, viewersRes] = await Promise.all([
       fetch(`https://decapi.me/twitch/uptime/${encodeURIComponent(channel)}`, {
         signal: controller.signal,
       }),
       fetch(`https://decapi.me/twitch/game/${encodeURIComponent(channel)}`, {
         signal: controller.signal,
       }),
+      fetch(
+        `https://decapi.me/twitch/viewercount/${encodeURIComponent(channel)}`,
+        { signal: controller.signal },
+      ),
     ]);
 
     const uptime = (await uptimeRes.text()).trim();
     const game = (await gameRes.text()).trim();
+    const viewersRaw = (await viewersRes.text()).trim();
+    const viewers = Number.parseInt(viewersRaw.replace(/[^\d]/g, ""), 10);
+    const viewerCount = Number.isFinite(viewers) ? viewers : null;
     const lower = uptime.toLowerCase();
 
     if (
@@ -55,7 +63,7 @@ export async function fetchStreamStatus(
       lower.includes("not found") ||
       lower.includes("is not live")
     ) {
-      return { state: "offline", game: null, title: null };
+      return { state: "offline", game: null, title: null, viewers: null };
     }
 
     if (uptime.length > 0 && !lower.includes("error")) {
@@ -63,6 +71,7 @@ export async function fetchStreamStatus(
         state: "live",
         game: game && !game.toLowerCase().includes("offline") ? game : null,
         title: null,
+        viewers: viewerCount,
       };
     }
   } catch {
@@ -71,7 +80,7 @@ export async function fetchStreamStatus(
     clearTimeout(timer);
   }
 
-  return { state: "unknown", game: null, title: null };
+  return { state: "unknown", game: null, title: null, viewers: null };
 }
 
 export function nowPlayingFromStatus(status: StreamStatus): NowPlaying {

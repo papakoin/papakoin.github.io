@@ -13,7 +13,7 @@ export const site = {
     twitch: "https://www.twitch.tv/papakow",
     youtube: "https://www.youtube.com/@papakoww",
     kick: "https://kick.com/papakow",
-    discord: "https://discord.com/invite/ktCYEm5eZR",
+    discord: "https://discord.gg/VMYGePuF6C",
     instagram: "https://www.instagram.com/papakow.clutch",
     x: "https://x.com/papakowclutch",
     tiktok: "https://www.tiktok.com/@papakow.clutch",
