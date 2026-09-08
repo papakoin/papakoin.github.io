@@ -54,7 +54,9 @@ If the embed is blank, the domain is missing from the request — load the site 
 - Set an httpOnly session cookie.
 - Then connect messages to Twitch chat (IRC / EventSub) instead of the local preview.
 
-Until that exists, the chat card is a preview. Discord remains the always-on community door: https://discord.gg/VMYGePuF6C
+Until that exists, the chat card is a preview of **unified chat** (Twitch · Kick · YouTube). Discord remains the always-on community door: https://discord.gg/VMYGePuF6C
+
+v1 does **not** include the old arcade dashboard widgets (loadouts, song requests, watch lineup, points board). Those can return later in the cream/yellow look.
 
 ## Deploy
 

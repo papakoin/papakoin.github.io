@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState, useSyncExternalStore } from "react";
-import { ArrowDownIcon, KickIcon, TwitchIcon, YouTubeIcon } from "@/components/icons";
+import { ArrowDownIcon } from "@/components/icons";
+import { WatchSources } from "@/components/watch-sources";
 import { site } from "@/lib/site";
 import {
   fetchStreamStatus,
@@ -115,6 +116,9 @@ export function LiveHero() {
                     {site.tagline} The Clutch Club is still open — come hang in
                     chat until we go live from {site.region}.
                   </p>
+                  <div className="mt-5">
+                    <WatchSources />
+                  </div>
                 </div>
               ) : (
                 <div className="rounded-[24px] border border-white/40 bg-white/38 px-5 py-4 shadow-[0_12px_40px_rgba(60,40,10,0.1)] backdrop-blur-xl">
@@ -129,34 +133,8 @@ export function LiveHero() {
                     Streaming from {site.region}. One stream on Twitch, Kick,
                     and YouTube.
                   </p>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    <a
-                      href={site.links.twitch}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center gap-1.5 rounded-full bg-white/70 px-2.5 py-1 text-[11px] font-semibold text-charcoal no-underline"
-                    >
-                      <TwitchIcon size={12} />
-                      Twitch
-                    </a>
-                    <a
-                      href={site.links.youtube}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center gap-1.5 rounded-full bg-white/70 px-2.5 py-1 text-[11px] font-semibold text-charcoal no-underline"
-                    >
-                      <YouTubeIcon size={12} />
-                      YouTube
-                    </a>
-                    <a
-                      href={site.links.kick}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center gap-1.5 rounded-full bg-white/70 px-2.5 py-1 text-[11px] font-semibold text-charcoal no-underline"
-                    >
-                      <KickIcon size={12} />
-                      Kick
-                    </a>
+                  <div className="mt-3">
+                    <WatchSources />
                   </div>
                 </div>
               )}

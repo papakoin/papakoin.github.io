@@ -3,7 +3,7 @@
 import { FormEvent, useState, useSyncExternalStore } from "react";
 import { DiscordIcon, SmileIcon, TwitchIcon } from "@/components/icons";
 import { SectionHeading } from "@/components/section-heading";
-import { chatPreview, site, type ChatTone } from "@/lib/site";
+import { chatPreview, site, type ChatSource, type ChatTone } from "@/lib/site";
 import {
   captureImplicitTokenFromHash,
   clearSession,
@@ -26,6 +26,16 @@ type Line = {
   text: string;
   time: string;
   tone: ChatTone | "local";
+  source: ChatSource | "local";
+  href?: string;
+};
+
+const sourceLabel: Record<ChatSource | "local", string> = {
+  twitch: "Twitch",
+  kick: "Kick",
+  youtube: "YouTube",
+  bot: "Bot",
+  local: "You",
 };
 
 function stamp() {
@@ -90,6 +100,7 @@ export function JoinChat() {
         text,
         time: stamp(),
         tone: "local",
+        source: "local",
       },
     ]);
     setDraft("");
@@ -170,9 +181,12 @@ export function JoinChat() {
           <div className="rounded-[28px] bg-white p-5 shadow-[0_20px_50px_rgba(80,50,20,0.08)] sm:p-6">
             <div className="mb-4 flex items-center justify-between gap-3">
               <div>
-                <p className="text-sm font-semibold text-charcoal">Live chat</p>
-                <p className="text-[11px] text-muted">
-                  Twitch · Kick · YouTube
+                <p className="text-sm font-semibold text-charcoal">
+                  Unified chat
+                </p>
+                <p className="flex items-center gap-1.5 text-[11px] text-muted">
+                  <span className="size-1.5 rounded-full bg-[#3d9a64]" />
+                  3 linked · Twitch · Kick · YouTube
                 </p>
               </div>
               <span className="rounded-full bg-sun px-2.5 py-1 text-[10px] font-bold tracking-[0.14em] text-charcoal uppercase">
@@ -189,13 +203,28 @@ export function JoinChat() {
                   </span>
                   <div className="min-w-0 flex-1">
                     <div className="flex items-baseline justify-between gap-3">
-                      <p className="truncate text-sm font-semibold text-charcoal">
-                        {line.user}
+                      <p className="flex min-w-0 items-baseline gap-2">
+                        <span className="truncate text-sm font-semibold text-charcoal">
+                          {line.user}
+                        </span>
+                        <span className="shrink-0 text-[10px] font-semibold tracking-wide text-muted uppercase">
+                          {sourceLabel[line.source]}
+                        </span>
                       </p>
                       <p className="shrink-0 text-[11px] text-muted">{line.time}</p>
                     </div>
                     <p className="text-sm leading-relaxed text-charcoal/75">
-                      {line.text}
+                      {line.text}{" "}
+                      {line.href ? (
+                        <a
+                          href={line.href}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="font-semibold text-charcoal underline decoration-sun decoration-2 underline-offset-2"
+                        >
+                          discord.gg/VMYGePuF6C
+                        </a>
+                      ) : null}
                     </p>
                   </div>
                 </li>

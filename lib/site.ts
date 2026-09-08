@@ -39,10 +39,14 @@ export const fallbackNowPlaying: NowPlaying = {
     "Soft pastel coastal arena in cream, peach, and sun-yellow light",
 };
 
+export const chatSources = ["twitch", "kick", "youtube"] as const;
+export type ChatSource = (typeof chatSources)[number] | "bot";
+
 export const chatPreview = [
   {
     id: "1",
     user: "sunnyvale_",
+    source: "twitch" as const,
     text: "LET'S GO that round was filthy",
     time: "10:24 AM",
     tone: "peach",
@@ -50,6 +54,7 @@ export const chatPreview = [
   {
     id: "2",
     user: "clutchkingau",
+    source: "kick" as const,
     text: "OCE represent. Clutch Club in the building.",
     time: "10:24 AM",
     tone: "sun",
@@ -57,14 +62,17 @@ export const chatPreview = [
   {
     id: "3",
     user: "peachyaim",
-    text: "New here — this vibe is so warm. Hi everyone.",
+    source: "youtube" as const,
+    text: "Watching from papakow.com. This vibe is home.",
     time: "10:25 AM",
     tone: "sky",
   },
   {
     id: "4",
-    user: "raidtrain",
-    text: "Showing up for the grind. Love this community 💛",
+    user: "ClutchBot",
+    source: "bot" as const,
+    text: "Discord is open — come hang with The Clutch Club.",
+    href: "https://discord.gg/VMYGePuF6C",
     time: "10:26 AM",
     tone: "coral",
   },
