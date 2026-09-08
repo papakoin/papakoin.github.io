@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-cream: #fbf6ee;
+  --color-cream-2: #f3ebd8;
+  --color-sun: #f5d76e;
+  --color-sun-deep: #e8c34a;
+  --color-sun-wash: #f6e7b4;
+  --color-peach: #f0b49b;
+  --color-coral: #e89b88;
+  --color-charcoal: #2c2a26;
+  --color-ink: #1c1a17;
+  --color-muted: #6f6a62;
+  --color-live: #e24b4b;
+  --font-sans: var(--font-outfit);
+  --font-serif: var(--font-fraunces);
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--color-cream);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .animate-ping {
+    animation: none;
+  }
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-charcoal);
+  font-family: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+}
+
+::selection {
+  background: var(--color-sun);
+  color: var(--color-charcoal);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--color-sun-deep);
+  outline-offset: 3px;
+}
+
+.hero-vignette {
+  background:
+    linear-gradient(180deg, rgba(28, 26, 23, 0.28) 0%, transparent 28%),
+    linear-gradient(0deg, rgba(28, 26, 23, 0.42) 0%, transparent 38%),
+    linear-gradient(90deg, rgba(28, 26, 23, 0.18) 0%, transparent 32%);
+}
+
+.grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+.font-serif {
+  font-family: var(--font-fraunces), ui-serif, Georgia, serif;
+}
